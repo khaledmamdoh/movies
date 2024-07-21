@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="././logo .png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- AOS effict -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <link rel="stylesheet" href="./css/output.css">
+    <title>Movies</title>
+</head>
+
+<body>
+    <section class=" py-psection bg-black h-auto ">
+        <div class="container">
+            <div class="search flex  justify-center  items-center">
+                <input type="text" name="" id="" placeholder="search" class=" w-1/2 p-3 rounded-full  ">
+            </div>
+            <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14 p-4" id="display"
+                data-aos="animate__fadeInRightBig" data-aos-duration="4000">
+
+            </div>
+
+
+        </div>
+
+
+
+    </section>
+
+    <!-- Contact us -->
+    <section class=" py-psection bg-black h-auto">
+        <div class="rounded-lg shadow relative px-20 ">
+
+            <div class="flex items-start justify-between  border-b rounded-t">
+                <h3 class="text-xl font-semibold text-white">
+                    Contact Us
+                </h3>
+
+            </div>
+
+
+            <form class="grid gap-4 my-4 md:grid-cols-2" id="register">
+                <div class="form-data ">
+                    <input type="name" id="name" class="form-control w-full p-2 border border-gray-300 rounded"
+                        placeholder="name Address" />
+                    <ul class=" p-0 text-red-600">
+
+                        <li class="alertName ">Invalid name Format</li>
+                    </ul>
+                </div>
+
+                <div class="form-data ">
+                    <input type="email" id="email" class="form-control w-full p-2 border border-gray-300 rounded"
+                        placeholder="Email Address" />
+                    <ul class="alertEmail   list-none p-0 text-red-600">
+                        <li>Email Is Required</li>
+                        <li>Invalid Email Format</li>
+                    </ul>
+                </div>
+                <div class="form-data ">
+                    <input type="number" id="phone" class="form-control w-full p-2 border border-gray-300 rounded"
+                        placeholder="Enter Your Mobile" />
+                    <ul class="alertphone  list-none p-0 text-red-600">
+                        <li>Mobile Is Required</li>
+                        <li>8 Degites</li>
+                    </ul>
+                </div>
+
+                <div class="form-data ">
+                    <input type="number" id="age" class="form-control w-full p-2 border border-gray-300 rounded"
+                        placeholder="Enter Age" />
+                    <ul class="alertage  list-none p-0 text-red-600">
+                        <li>Age Is Required</li>
+                        <li>Minimum 10 Maximum 80</li>
+                    </ul>
+                </div>
+                <div class="form-data ">
+                    <input type="password" id="password" class="form-control w-full p-2 border border-gray-300 rounded"
+                        placeholder="Password" />
+                    <ul class="alertpassword  list-none p-0 text-red-600">
+                        <li>Password Is Required</li>
+                        <li>Minimum eight characters, at least one letter and one number</li>
+                    </ul>
+                </div>
+                <div class="form-data ">
+                    <input type="password" id="repassword"
+                        class="form-control w-full p-2 border border-gray-300 rounded"
+                        placeholder=" Re-Enter Your Password" />
+                    <ul class="alertrepassword  list-none p-0 text-red-600">
+                        <li>Password Is Required</li>
+
+                    </ul>
+                </div>
+                <div class="w-full my-10">
+                    <button type="submit"
+                        class="    bg-red-400 text-white  hover:text-black hover:bg-white  transition-all duration-700  py-2 rounded"
+                        id="btnRegister">Submit</button>
+                    <p id="msg" class="text-center mt-2"></p>
+                </div>
+
+            </form>
+        </div>
+        <footer class="flex   justify-center p-6">
+            <button class=" bg-transparent text-2xl   relative" id="scrollToTopBtn">☝️</button>
+
+        </footer>
+    </section>
+
+
+
+
+
+
+
+
+
+    <!-- Side navbar -->
+
+    <nav class="side-nav h-[100vh] fixed flex z-50 top-0">
+        <div class="nav-tap bg-black flex flex-col justify-between h-[100vh] p-6">
+            <div class="links">
+                <ul class="overflow-hidden list-none">
+                    <li class=" py-4 relative cursor-pointer text-white hover:text-red-600 capitalize playing ">now
+                        playing</li>
+                    <li class=" popular py-4 relative cursor-pointer text-white hover:text-red-600 capitalize ">
+                        popular </li>
+                    <li class="rated py-4 relative cursor-pointer text-white hover:text-red-600 capitalize ">top rated
+                    </li>
+                    <li class="trending py-4 relative cursor-pointer text-white hover:text-red-600 capitalize ">
+                        trending</li>
+                    <li class="upcoming py-4 relative cursor-pointer  text-white hover:text-red-600 capitalize ">
+                        upcoming</li>
+
+                </ul>
+            </div>
+            <div class="">
+                <a href="#contact"
+                    class="py-4 relative cursor-pointer contact-us-li text-white hover:text-red-600 capitalize ">contact
+                    us</a>
+                <div class="icons">
+                    <i class="fa-brands fa-facebook "></i>
+                    <i class="fa-brands fa-twitter"></i>
+                    <i class="fa-solid fa-globe"></i>
+                </div>
+                <div>
+                    <div class="rights-social mx-6  text-start pb-6 ">
+                        <a href="#"><i class="fa-brands fa-facebook-f text-white  text-sm px-2 "></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter text-white  text-sm px-2 "></i></a>
+                        <a href="#"><i class="fa-solid fa-globe text-white  text-sm px-2 "></i></a>
+                    </div>
+                    <p class="text-white">Copyright Â© 2019 All Rights <br />Reserved.</p>
+                    <p class=" text-white py-6">Created By <a class="text-red-600  font-bold" href="#">Khaled
+                            Mamdouh</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-col justify-between py-6 text-center px-2 bg-white left-0 text-black">
+            <img class="w-12" src="./logo .png" alt="" srcset="" />
+            <i class="fa-solid open-nav-icon fa-bars fa-2x cursor-pointer"></i>
+            <div>
+                <i class="fa-solid fa-globe block"></i>
+                <i class="fa-solid fa-share-nodes"></i>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+
+    <script src="./js/jquery-3.7.1.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+    <script src="./js/main.js"></script>
+
+</body>
+
+</html>
