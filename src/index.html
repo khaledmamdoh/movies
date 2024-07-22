@@ -16,10 +16,16 @@
 </head>
 
 <body>
+    <!-- loading screen -->
+    <div class="loading flex  justify-center  items-center fixed  top-0 start-0  w-[100%] h-[100%]  bg-black z-[9999]">
+        <span class="loader"></span>
+    </div>
+    <!-- display container -->
     <section class=" py-psection bg-black h-auto ">
         <div class="container">
             <div class="search flex  justify-center  items-center">
-                <input type="text" name="" id="" placeholder="search" class=" w-1/2 p-3 rounded-full  ">
+                <input type="search" oninput="searchItem()" name="" id="searchInput" placeholder="search"
+                    class=" w-1/2 p-3 rounded-full  ">
             </div>
             <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-14 p-4" id="display"
                 data-aos="animate__fadeInRightBig" data-aos-duration="4000">
@@ -34,11 +40,11 @@
     </section>
 
     <!-- Contact us -->
-    <section class=" py-psection bg-black h-auto">
+    <section class="  py-psection bg-black h-auto">
         <div class="rounded-lg shadow relative px-20 ">
 
-            <div class="flex items-start justify-between  border-b rounded-t">
-                <h3 class="text-xl font-semibold text-white">
+            <div class=" flex items-start justify-between  border-b rounded-t">
+                <h3 class=" text-xl font-semibold text-white">
                     Contact Us
                 </h3>
 
@@ -169,6 +175,7 @@
             </div>
         </div>
     </nav>
+
 
 
 

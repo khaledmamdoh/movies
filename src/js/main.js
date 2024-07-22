@@ -50,6 +50,45 @@ $('.open-nav-icon').click(() => {
 
 
 // ************************************************ now playing   ************************************************
+// search
+
+let container = [];
+
+
+
+function searchItem() {
+    let term = $('#searchInput').val();
+    let box = ``;
+    for (let i = 0; i < container.length; i++) {
+        if (container[i].title.toLowerCase().includes(term.toLowerCase())) {
+
+            box += `
+        <div class="item overflow-hidden relative group rounded-md  ">
+                    <div class="cardImage " data-aos="fade-up">
+                        <img src="https://image.tmdb.org/t/p/w500/${container[i].poster_path}"
+                            class="w-full h-auto transition-all duration-1000">
+                    </div>
+                    <div class="overlay absolute inset-0 flex flex-col justify-start items-center text-white px-4  ">
+                        <h1 class="title py-10">${container[i].title}</h1>
+                        <p class="desc py-10  ">${container[i].overview}</p>
+                        <p class="date "><span class="fst-normal">Release Date: <span>${container[i].release_date}</span></span></p>
+                        <h3 class="rate "><i class="fa-solid fa-star text-warning fs-6"></i><i
+                                class="fa-solid fa-star text-warning fs-6"></i><i
+                                class="fa-solid fa-star text-warning fs-6"></i><i
+                                class="fa-regular fa-star-half-stroke text-warning fs-6"></i></h3>
+                        <h3 class="vote rounded-full p-4 border-4 border-green-600 mt-10">${container[i].vote_average}</h3>
+                    </div>
+                </div>
+        `
+        }
+    }
+    document.getElementById('display').innerHTML = box;
+
+}
+
+
+
+
 
 getPlaying();
 
@@ -69,8 +108,8 @@ async function getPlaying() {
     const res = await fetch('https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1', options)
     const data = await res.json()
     const newRes = await data.results
-
-    displayMovies(newRes);
+    container = newRes
+    displayMovies();
 }
 // ************************************************ Popular   ************************************************
 $('.popular').on('click', function () {
@@ -88,7 +127,8 @@ async function getPopular() {
     const res = await fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options)
     const data = await res.json()
     const newRes = await data.results
-    displayMovies(newRes);
+    container = newRes
+    displayMovies();
 
 }
 // ************************************************ Top rated   ************************************************
@@ -100,22 +140,18 @@ async function getTopRated() {
         method: 'GET',
         headers: {
             accept: 'application/json',
-            Authorization: 'Bearer YOUR_ACCESS_TOKEN'  // Replace with your actual token
+            Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5YWNmNGYxZWIyYTQ3Y2E1NGQ3MTMwMmQ0NTNmN2JhNyIsIm5iZiI6MTcyMTY0MzA1MS45NDY2OTEsInN1YiI6IjY2OWM0ZGZhNWMwMGYyN2Q1MDA1ZDlmMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ozhucWqrI5yd4iiLsOPLrquKac71NV0eNq8lupVysyg'
         }
     };
 
-    try {
-        const res = await fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options);
-        if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
-        }
-        const data = await res.json();
-        const movies = data.results;
-        displayMovies(movies);
-    } catch (error) {
-        console.error('Error fetching top-rated movies:', error);
-    }
+    const res = await fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
+    const data = await res.json()
+    const newRes = await data.results
+    container = newRes
+    displayMovies();
 }
+
+
 
 
 
@@ -131,9 +167,10 @@ $('.trending').on('click', function () {
 async function getTrending() {
     const res = await fetch('https://api.themoviedb.org/3/trending/all/day?api_key=eba8b9a7199efdcb0ca1f96879b83c44')
     const data = await res.json();
-    const newdata = await data.results
+    const newRes = await data.results
 
-    displayMovies(newdata);
+    container = newRes
+    displayMovies();
 }
 // // ************************************************ UpComing   ************************************************
 $('.upcoming').on('click', function () {
@@ -155,30 +192,31 @@ async function getUpcoming() {
 
 
 
-    displayMovies(newRes)
+    container = newRes
+    displayMovies();
 }
 
 
 
 
-function displayMovies(data) {
+function displayMovies() {
     let box = ``;
-    for (let i = 0; i < data.length; i++) {
+    for (let i = 0; i < container.length; i++) {
         box += `
         <div class="item overflow-hidden relative group rounded-md  ">
                     <div class="cardImage " data-aos="fade-up">
-                        <img src="https://image.tmdb.org/t/p/w500/${data[i].poster_path}"
+                        <img src="https://image.tmdb.org/t/p/w500/${container[i].poster_path}"
                             class="w-full h-auto transition-all duration-1000">
                     </div>
                     <div class="overlay absolute inset-0 flex flex-col justify-start items-center text-white px-4  ">
-                        <h1 class="title py-10">${data[i].title}</h1>
-                        <p class="desc py-10  ">${data[i].overview}</p>
-                        <p class="date "><span class="fst-normal">Release Date: <span>${data[i].release_date}</span></span></p>
+                        <h1 class="title py-10">${container[i].title}</h1>
+                        <p class="desc py-10  ">${container[i].overview}</p>
+                        <p class="date "><span class="fst-normal">Release Date: <span>${container[i].release_date}</span></span></p>
                         <h3 class="rate "><i class="fa-solid fa-star text-warning fs-6"></i><i
                                 class="fa-solid fa-star text-warning fs-6"></i><i
                                 class="fa-solid fa-star text-warning fs-6"></i><i
                                 class="fa-regular fa-star-half-stroke text-warning fs-6"></i></h3>
-                        <h3 class="vote rounded-full p-4 border-4 border-green-600 mt-10">${data[i].vote_average}</h3>
+                        <h3 class="vote rounded-full p-4 border-4 border-green-600 mt-10">${container[i].vote_average}</h3>
                     </div>
                 </div>
         `
@@ -186,6 +224,10 @@ function displayMovies(data) {
     document.getElementById('display').innerHTML = box;
 
 }
+
+
+
+// regex 
 $('form').on('submit', function (e) {
     e.preventDefault();
 })
@@ -194,12 +236,12 @@ $('#name').on('input', function () {
     const regex = /^[a-z][a-z\s.'-]{5,49}$/;
 
     if (regex.test($(this).val())) {
-        console.log("tmam"); 
-        
+        console.log("tmam");
+
         $('.alertName').addClass('hidden')
         $('.alertName').removeClass('block')
     } else {
-        console.log("msh tmam"); 
+        console.log("msh tmam");
         $('.alertName').removeClass('hidden')
         $('.alertName').addClass('block')
 
@@ -209,12 +251,12 @@ $('#email').on('input', function () {
     const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
     if (regex.test($(this).val())) {
-        console.log("tmam"); 
-        
+        console.log("tmam");
+
         $('.alertEmail').addClass('hidden')
         $('.alertEmail').removeClass('block')
     } else {
-        console.log("msh tmam"); 
+        console.log("msh tmam");
         $('.alertEmail').removeClass('hidden')
         $('.alertEmail').addClass('block')
 
@@ -224,12 +266,12 @@ $('#phone').on('input', function () {
     const regex = /^\d{8}$/;
 
     if (regex.test($(this).val())) {
-        console.log("tmam"); 
-        
+        console.log("tmam");
+
         $('.alertphone').addClass('hidden')
         $('.alertphone').removeClass('block')
     } else {
-        console.log("msh tmam"); 
+        console.log("msh tmam");
         $('.alertphone').removeClass('hidden')
         $('.alertphone').addClass('block')
 
@@ -239,12 +281,12 @@ $('#age').on('input', function () {
     const regex = /^(1[0-9]|[2-7][0-9]|80)$/;
 
     if (regex.test($(this).val())) {
-        console.log("tmam"); 
-        
+        console.log("tmam");
+
         $('.alertage').addClass('hidden')
         $('.alertage').removeClass('block')
     } else {
-        console.log("msh tmam"); 
+        console.log("msh tmam");
         $('.alertage').removeClass('hidden')
         $('.alertage').addClass('block')
 
@@ -257,14 +299,14 @@ $('#password').on('input', function () {
     const regex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
 
     if (regex.test($(this).val())) {
-        console.log("tmam"); 
-        
+        console.log("tmam");
+
         $('.alertpassword').addClass('hidden')
         $('.alertpassword').removeClass('block')
-        
+
     } else {
-        console.log("msh tmam"); 
-        
+        console.log("msh tmam");
+
         $('.alertpassword').removeClass('hidden')
         $('.alertpassword').addClass('block')
 
@@ -281,6 +323,7 @@ $('#repassword').on('input', function () {
 });
 
 
+
 var scrollToTopBtn = document.getElementById("scrollToTopBtn");
 var rootElement = document.documentElement;
 
@@ -291,3 +334,18 @@ function scrollToTop() {
     });
 }
 scrollToTopBtn.addEventListener("click", scrollToTop);
+
+$(function () {
+    $('.loader').fadeOut(1000, function () {
+        $('.loading').slideUp(1000)
+    })
+})
+
+
+
+$('.contact-us-li').on('click', function () {
+    window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: "smooth"
+    });
+});
